@@ -7,15 +7,15 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.scene.Parent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -40,7 +40,10 @@ public class ControllerCharacters implements Initializable {
             System.err.println("Error loading image asset: " + imagePath);
             e.printStackTrace();
         }
+    
+        
     }
+    
 
     public void loadList() {
         try {
@@ -49,16 +52,26 @@ public class ControllerCharacters implements Initializable {
             String content = new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
             JSONArray jsonInfo = new JSONArray(content);
 
+            URL resource = this.getClass().getResource("/assets/itemCharacters.fxml");
+
             list.getChildren().clear();
             for (int i = 0; i < jsonInfo.length(); i++) {
                 JSONObject character = jsonInfo.getJSONObject(i);
+
                 String name = character.getString("name");
-                
-                // TODO: Aquí carregar subvista  
-                // amb les dades de cada objecte enlloc d'un Label
-                Label label = new Label(name);
-                label.setStyle("-fx-border-color: green;");
-                list.getChildren().add(label);
+                String color = character.getString("color");
+                String game = character.getString("game");
+
+                FXMLLoader loader = new FXMLLoader(resource);
+                Parent itemTemplate = loader.load();
+                ControllerItem itemController = loader.getController();
+
+                itemController.setNameCharacter(name);  // Asignar el nombre
+                itemController.setImatge("./data/pokeImages" + name.toLowerCase() + ".png");  // Asignar la imagen
+                itemController.setCircleColor(color);  // Asignar el color al círculo
+                itemController.setGame(game);  // Agregar esta línea para asignar el nombre del juego
+
+                list.getChildren().add(itemTemplate);
             }
         } catch (Exception e) {
             e.printStackTrace();
