@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="14.0" prefWidth="69.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.exercici0601.ControllerItem">
    <children>
       <HBox layoutX="3.0" layoutY="1.0" prefHeight="13.0" prefWidth="53.0">
          <children>
-            <ImageView fx:id="imageCharacters" fitHeight="13.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" />
-            <Text fx:id="nameCharacter" strokeType="OUTSIDE" strokeWidth="0.0" text="NAME" wrappingWidth="21.309999465942383">
+            <ImageView fx:id="imgCharacter" fitHeight="13.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="lblname" prefHeight="18.0" prefWidth="30.0" text="name">
                <font>
-                  <Font size="5.0" />
+                  <Font size="7.0" />
                </font>
-            </Text>
+            </Label>
          </children>
       </HBox>
-      <Text fx:id="game" layoutX="22.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME">
+      <Label fx:id="lblgame" layoutX="18.0" layoutY="11.0" text="game">
          <font>
-            <Font size="3.0" />
+            <Font size="4.0" />
          </font>
-      </Text>
+      </Label>
    </children>
 </AnchorPane>

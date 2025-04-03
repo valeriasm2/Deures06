@@ -40,10 +40,7 @@ public class ControllerCharacters implements Initializable {
             System.err.println("Error loading image asset: " + imagePath);
             e.printStackTrace();
         }
-    
-        
     }
-    
 
     public void loadList() {
         try {
@@ -66,10 +63,10 @@ public class ControllerCharacters implements Initializable {
                 Parent itemTemplate = loader.load();
                 ControllerItem itemController = loader.getController();
 
-                itemController.setNameCharacter(name);  // Asignar el nombre
-                itemController.setImatge("./data/pokeImages" + name.toLowerCase() + ".png");  // Asignar la imagen
-                itemController.setCircleColor(color);  // Asignar el color al círculo
-                itemController.setGame(game);  // Agregar esta línea para asignar el nombre del juego
+                itemController.setNameCharacter(name); // Asignar el nombre
+                itemController.setImatge("./data/pokeImages" + name.toLowerCase() + ".png"); // Asignar la imagen
+                itemController.setCircleColor(color); // Asignar el color al círculo
+                itemController.setGame(game); // Agregar esta línea para asignar el nombre del juego
 
                 list.getChildren().add(itemTemplate);
             }
