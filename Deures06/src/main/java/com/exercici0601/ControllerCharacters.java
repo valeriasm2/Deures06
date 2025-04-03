@@ -44,37 +44,51 @@ public class ControllerCharacters implements Initializable {
 
     public void loadList() {
         try {
-            URL jsonFileURL = getClass().getResource("/assets/data/characters.json");
-            Path path = Paths.get(jsonFileURL.toURI());
-            String content = new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
-            JSONArray jsonInfo = new JSONArray(content);
-
-            URL resource = this.getClass().getResource("/assets/itemCharacters.fxml");
-
+            System.out.println("Iniciando carga de personajes...");
+            
+            // 1. Cargar JSON
+            URL jsonUrl = getClass().getResource("/assets/data/characters.json");
+            if (jsonUrl == null) {
+                System.err.println("ERROR: No se encontró el archivo JSON");
+                return;
+            }
+            
+            String jsonContent = Files.readString(Paths.get(jsonUrl.toURI()));
+            JSONArray characters = new JSONArray(jsonContent);
+            System.out.println("Encontrados " + characters.length() + " personajes");
+    
+            // 2. Cargar plantilla
+            URL itemTemplateUrl = getClass().getResource("/assets/itemCharacters.fxml");
+            if (itemTemplateUrl == null) {
+                System.err.println("ERROR: No se encontró la plantilla FXML");
+                return;
+            }
+    
+            // 3. Limpiar lista existente
             list.getChildren().clear();
-            for (int i = 0; i < jsonInfo.length(); i++) {
-                JSONObject character = jsonInfo.getJSONObject(i);
-
-                String name = character.getString("name");
-                String color = character.getString("color");
-                String game = character.getString("game");
-
-                FXMLLoader loader = new FXMLLoader(resource);
-                Parent itemTemplate = loader.load();
-                ControllerItem itemController = loader.getController();
-
-                itemController.setNameCharacter(name); // Asignar el nombre
-                itemController.setImatge("./data/pokeImages" + name.toLowerCase() + ".png"); // Asignar la imagen
-                itemController.setCircleColor(color); // Asignar el color al círculo
-                itemController.setGame(game); // Agregar esta línea para asignar el nombre del juego
-
-                list.getChildren().add(itemTemplate);
+    
+            // 4. Añadir cada personaje
+            for (int i = 0; i < characters.length(); i++) {
+                JSONObject character = characters.getJSONObject(i);
+                
+                FXMLLoader loader = new FXMLLoader(itemTemplateUrl);
+                Parent item = loader.load();
+                ControllerItem controller = loader.getController();
+                
+                // Configurar valores
+                controller.setNameCharacter(character.getString("name"));
+                controller.setImatge("/assets/images0601/" + character.getString("name").toLowerCase() + ".png");
+                controller.setCircleColor(character.getString("color"));
+                controller.setGame(character.getString("game"));
+                
+                list.getChildren().add(item);
+                System.out.println("Añadido: " + character.getString("name"));
             }
         } catch (Exception e) {
+            System.err.println("ERROR CRÍTICO al cargar personajes:");
             e.printStackTrace();
         }
     }
-
     @FXML
     private void toViewMain(MouseEvent event) {
         UtilsViews.setViewAnimating("ViewMain");

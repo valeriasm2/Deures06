@@ -11,33 +11,37 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 public class ControllerItem {
-
     @FXML
-    private Label lblName;
-
-    @FXML
-    private ImageView imgCharacter;
-
-    @FXML
-    private Circle circleColor;
-
-    @FXML
-    private Label lblGame;
+    public Circle circleColor;
+    
+    @FXML 
+    public ImageView imgCharacter;
+    
+    @FXML 
+    public Label lblName;
+    
+    @FXML 
+    public Label lblGame;
 
     public void setNameCharacter(String name) {
         lblName.setText(name);
     }
 
     public void setImatge(String imagePath) {
-        imgCharacter.setImage(new Image(getClass().getResource(imagePath).toExternalForm()));
+        try {
+            Image img = new Image(getClass().getResourceAsStream(imagePath));
+            imgCharacter.setImage(img);
+        } catch (Exception e) {
+            System.err.println("Error loading image: " + imagePath);
+            imgCharacter.setImage(null); // Imagen por defecto o vacía
+        }
     }
 
     public void setCircleColor(String color) {
-        circleColor.setFill(Color.valueOf(color));
+        circleColor.setFill(Color.web(color));
     }
 
     public void setGame(String game) {
         lblGame.setText(game);
     }
 }
-
