@@ -72,17 +72,27 @@ public class ControllerCharacters implements Initializable {
                 JSONObject character = characters.getJSONObject(i);
                 
                 FXMLLoader loader = new FXMLLoader(itemTemplateUrl);
-                Parent item = loader.load();
-                ControllerItem controller = loader.getController();
-                
-                // Configurar valores
-                controller.setNameCharacter(character.getString("name"));
-                controller.setImatge("/assets/images0601/" + character.getString("name").toLowerCase() + ".png");
-                controller.setCircleColor(character.getString("color"));
-                controller.setGame(character.getString("game"));
-                
-                list.getChildren().add(item);
-                System.out.println("Añadido: " + character.getString("name"));
+                try {
+                    Parent item = loader.load();
+                    ControllerItem controller = loader.getController();
+                    
+                    if (controller == null) {
+                        System.err.println("ERROR: El controlador es null para " + character.getString("name"));
+                        continue;
+                    }
+                    
+                    // Configurar valores
+                    controller.setNameCharacter(character.getString("name"));
+                    controller.setImatge("/assets/images0601/" + character.getString("name").toLowerCase() + ".png");
+                    controller.setCircleColor(character.getString("color"));
+                    controller.setGame(character.getString("game"));
+                    
+                    list.getChildren().add(item);
+                    System.out.println("Añadido: " + character.getString("name"));
+                } catch (Exception e) {
+                    System.err.println("Error cargando personaje: " + character.getString("name"));
+                    e.printStackTrace();
+                }
             }
         } catch (Exception e) {
             System.err.println("ERROR CRÍTICO al cargar personajes:");

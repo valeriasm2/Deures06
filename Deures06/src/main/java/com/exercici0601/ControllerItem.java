@@ -1,8 +1,5 @@
 package com.exercici0601;
 
-import java.util.Objects;
-
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -12,16 +9,16 @@ import javafx.scene.shape.Circle;
 
 public class ControllerItem {
     @FXML
-    public Circle circleColor;
+    private Circle circleColor;
     
     @FXML 
-    public ImageView imgCharacter;
+    private ImageView imgCharacter;
     
     @FXML 
-    public Label lblName;
+    private Label lblName;
     
     @FXML 
-    public Label lblGame;
+    private Label lblGame;
 
     public void setNameCharacter(String name) {
         lblName.setText(name);
@@ -33,12 +30,14 @@ public class ControllerItem {
             imgCharacter.setImage(img);
         } catch (Exception e) {
             System.err.println("Error loading image: " + imagePath);
-            imgCharacter.setImage(null); // Imagen por defecto o vacía
+            imgCharacter.setImage(null);
         }
     }
 
     public void setCircleColor(String color) {
-        circleColor.setFill(Color.web(color));
+        if (circleColor != null && color != null) {
+            circleColor.setFill(Color.web(color));
+        }
     }
 
     public void setGame(String game) {
