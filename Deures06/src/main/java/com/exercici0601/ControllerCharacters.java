@@ -1,5 +1,6 @@
 package com.exercici0601;
 
+import com.exercici0601.ControllerFitxa;
 import com.utils.*;
 
 import java.net.URL;
@@ -13,6 +14,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -83,10 +85,36 @@ public class ControllerCharacters implements Initializable {
 
     private AnchorPane createCharacterItem(String name, String game, String imagePath, String color) {
         try {
-            // Crear el diseño del ítem
             AnchorPane item = new AnchorPane();
             item.setMaxHeight(50.0);
-            item.setStyle("-fx-background-color: white; -fx-border-style: solid; -fx-border-width: 0 0 1 0; -fx-border-color: grey;");
+            item.setStyle(
+                    "-fx-background-color: white; -fx-border-style: solid; -fx-border-width: 0 0 1 0; -fx-border-color: grey;");
+
+            // Hacer el item clickeable
+            item.setOnMouseClicked(event -> {
+                try {
+                    // 1. Obtener el controlador CORRECTAMENTE
+                    ControllerFitxa controller = (ControllerFitxa) UtilsViews.getController("viewPersonatgeFitxa");
+                    
+                    if (controller == null) {
+                        throw new Exception("No se pudo obtener el controlador de viewPersonatgeFitxa");
+                    }
+                    
+                    // 2. Pasar los datos
+                    controller.setCharacterData(name, game, imagePath, color);
+                    
+                    // 3. Cambiar a la vista
+                    UtilsViews.setViewAnimating("viewPersonatgeFitxa");
+                    
+                } catch (Exception e) {
+                    System.err.println("Error al abrir ficha de personaje:");
+                    e.printStackTrace();
+                    
+                    // Depuración adicional
+                    System.out.println("Vista viewPersonatgeFitxa existe: " + 
+                        (UtilsViews.getController("viewPersonatgeFitxa") != null));
+                }
+            });
 
             HBox hbox = new HBox();
             hbox.setAlignment(Pos.CENTER_LEFT);
@@ -113,7 +141,6 @@ public class ControllerCharacters implements Initializable {
             textContainer.getChildren().addAll(lblName, lblGame);
             hbox.getChildren().addAll(imgCharacter, textContainer);
 
-            
             // Añadir círculo de color
             Circle colorCircle = new Circle(10, Color.web(color));
             HBox.setMargin(colorCircle, new Insets(0, 15, 0, 0));

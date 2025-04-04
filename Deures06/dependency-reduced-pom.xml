@@ -10,8 +10,23 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.11.0</version>
         <configuration>
-          <release>17</release>
+          <release>${maven.compiler.release}</release>
           <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-maven-plugin</artifactId>
+        <version>0.0.8</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <mainClass>${mainClass}</mainClass>
         </configuration>
       </plugin>
       <plugin>
@@ -26,7 +41,7 @@
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>com.server.Main</mainClass>
+                  <mainClass>${mainClass}</mainClass>
                 </transformer>
               </transformers>
               <finalName>server-package</finalName>
@@ -53,7 +68,7 @@
               </execution>
             </executions>
             <configuration>
-              <mainClass>${exec.mainClass}</mainClass>
+              <mainClass>${mainClass}</mainClass>
               <arguments>
                 <argument>${javafx.platform}</argument>
               </arguments>
@@ -115,7 +130,10 @@
     </dependency>
   </dependencies>
   <properties>
+    <maven.compiler.release>17</maven.compiler.release>
+    <mainClass>com.exercici0601.Main</mainClass>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <javafx.version>23.0.1</javafx.version>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
 </project>

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -8,26 +10,34 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="558.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.exercici0601.ControllerFitxa">
+<AnchorPane prefHeight="526.0" prefWidth="379.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.exercici0601.ControllerFitxa">
    <children>
-      <HBox prefHeight="18.0" prefWidth="380.0" style="-fx-background-color: rgb(255, 164, 144 );" />
-      <Text fx:id="name" layoutX="132.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
-         <font>
-            <Font size="41.0" />
-         </font>
-      </Text>
-      <HBox layoutY="549.0" prefHeight="18.0" prefWidth="380.0" style="-fx-background-color: rgb(255, 164, 144 );" />
-      <ImageView fx:id="imgCharacter" fitHeight="283.0" fitWidth="334.0" layoutX="23.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" />
-      <Text fx:id="game" layoutX="166.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" text="game">
+      <HBox prefHeight="44.0" prefWidth="387.0" style="-fx-background-color: rgb(255, 164, 144 );">
+         <children>
+            <ImageView fx:id="imgArrowBack" fitHeight="43.0" fitWidth="16.0" onMouseClicked="#toViewMain" pickOnBounds="true" preserveRatio="true">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <image>
+                  <Image url="@images0601/arrow-back.png" />
+               </image>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" top="10.0" />
+               </HBox.margin>
+            </ImageView>
+            <Text fx:id="name" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" textAlignment="CENTER" underline="true" wrappingWidth="358.28564453125">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Text>
+         </children></HBox>
+      <HBox layoutX="-1.0" layoutY="508.0" prefHeight="18.0" prefWidth="387.0" style="-fx-background-color: rgb(255, 164, 144 );" />
+      <ImageView fx:id="imgCharacter" fitHeight="283.0" fitWidth="221.0" layoutX="102.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" />
+      <Text fx:id="game" layoutX="156.0" layoutY="397.0" strokeType="OUTSIDE" strokeWidth="0.0" text="game">
          <font>
             <Font size="19.0" />
          </font>
       </Text>
-      <Circle fx:id="color" fill="DODGERBLUE" layoutX="189.0" layoutY="481.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
-      <ImageView fx:id="imgArrowBack" fitHeight="25.0" fitWidth="25.0" layoutX="11.0" layoutY="25.0" onMouseClicked="#toViewMain" pickOnBounds="true" preserveRatio="true">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </ImageView>
+      <Circle fx:id="color" fill="DODGERBLUE" layoutX="193.0" layoutY="443.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
    </children>
 </AnchorPane>
