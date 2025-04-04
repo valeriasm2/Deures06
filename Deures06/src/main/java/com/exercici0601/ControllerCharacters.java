@@ -93,26 +93,19 @@ public class ControllerCharacters implements Initializable {
             // Hacer el item clickeable
             item.setOnMouseClicked(event -> {
                 try {
-                    // 1. Obtener el controlador CORRECTAMENTE
                     ControllerFitxa controller = (ControllerFitxa) UtilsViews.getController("viewPersonatgeFitxa");
                     
                     if (controller == null) {
                         throw new Exception("No se pudo obtener el controlador de viewPersonatgeFitxa");
                     }
-                    
-                    // 2. Pasar los datos
                     controller.setCharacterData(name, game, imagePath, color);
                     
-                    // 3. Cambiar a la vista
                     UtilsViews.setViewAnimating("viewPersonatgeFitxa");
                     
                 } catch (Exception e) {
                     System.err.println("Error al abrir ficha de personaje:");
                     e.printStackTrace();
-                    
-                    // Depuración adicional
-                    System.out.println("Vista viewPersonatgeFitxa existe: " + 
-                        (UtilsViews.getController("viewPersonatgeFitxa") != null));
+                    System.out.println("Vista viewPersonatgeFitxa existe: " + (UtilsViews.getController("viewPersonatgeFitxa") != null));
                 }
             });
 
