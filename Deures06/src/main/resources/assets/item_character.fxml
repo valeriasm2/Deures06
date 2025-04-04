@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<HBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" spacing="10" alignment="CENTER_LEFT" style="-fx-border-color: lightgray; -fx-padding: 10;">
+    <ImageView fx:id="imgCharacter" fitWidth="50" fitHeight="50" />
+    <VBox spacing="5">
+        <Label fx:id="lblName" style="-fx-font-weight: bold; -fx-font-size: 14px;" />
+        <Label fx:id="lblGame" style="-fx-font-size: 12px; -fx-text-fill: #555;" />
+    </VBox>
+    <Circle fx:id="circleColor" radius="10" />
+</HBox>
