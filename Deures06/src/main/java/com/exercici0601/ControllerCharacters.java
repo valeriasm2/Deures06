@@ -1,6 +1,5 @@
 package com.exercici0601;
 
-import com.exercici0601.ControllerFitxa;
 import com.utils.*;
 
 import java.net.URL;
@@ -14,7 +13,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
